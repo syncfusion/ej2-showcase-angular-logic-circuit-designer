@@ -1,0 +1,330 @@
+<style>
+  .e-file-select-wrap {
+      display: none;
+  }
+  #conTypeBtn {
+      width: 45px!important;
+      height: 35px;
+      padding: 0px 0px 0px 0px;
+  }
+  #designContextMenu,#toolsContextMenu{
+      width: 100px !important;
+  }
+  #editContextMenu{
+      width: 120px !important;
+  }
+  /* .editMenu{
+      width: 120px;
+  } */
+  #hideProperty{
+      width: 28px;
+      height: 28px;
+      margin-left: 30px;
+      margin-bottom: 7px !important;
+  }
+  .db-toolbar-container{
+      width: 100%!important;
+  }
+  .close{
+      float: right;
+      border-color: #b5b5b5;
+  }
+  #js-licensing{
+      display: none;
+  }   
+  .pan-item{
+      margin-left: 3px;
+  } 
+  .designMenu .e-contextmenu.e-menu-parent{
+      width: auto!important;
+  }
+  .toolsMenu .e-contextmenu.e-menu-parent{
+      width: auto!important;
+  }
+</style>
+<input type="file" id="fileupload" name="UploadFiles">
+<ejs-contextmenu id='editContextMenu' [animationSettings]='animationSettings' [items]='dropDownDataSources.getEditMenuItems'
+    (onOpen)='utilityMethods.editContextMenuOpen($event)' cssClass="editMenu" (beforeItemRender)="beforeItemRender($event)"
+    (beforeClose)="utilityMethods.arrangeMenuBeforeClose($event)" (select)="menuClick($event)">
+</ejs-contextmenu>
+<ejs-contextmenu id='designContextMenu' #designContextMenu [animationSettings]='animationSettings' [items]='dropDownDataSources.getDesignMenuItems'
+    (onOpen)='utilityMethods.designContextMenuOpen($event)' cssClass="designMenu" (beforeItemRender)="beforeItemRender($event)"
+    (beforeClose)="utilityMethods.arrangeMenuBeforeClose($event)" (select)="menuClick($event)">
+</ejs-contextmenu>
+<div class='diagrambuilder-container tailwind' >
+  <div class='header navbar'>
+    <div class="db-header-container">
+      <div class="db-diagram-name-container">
+        <span id='diagramName' class="db-diagram-name" (click)='renameDiagram($event)'>Untitled Diagram</span>
+        <input id='diagramEditable' type="text" class="db-diagram-name" (keydown)='diagramNameKeyDown($event)' (focusout)='diagramNameChange($event)'
+        />
+        <span id='diagramreport' class="db-diagram-name" style="float:right"></span>
+      </div>
+      <div class='db-menu-container'>
+        <div class="db-menu-style">
+          <button ejs-dropdownbutton id="btnFileMenu" #btnFileMenu cssClass='db-dropdown-menu'  content="File"
+          [items]='dropDownDataSources.getFileMenuItems' (select)="menuClick($event)"
+          (beforeOpen)="utilityMethods.arrangeMenuBeforeOpen($event)" 
+          (beforeItemRender)="beforeItemRender($event)" 
+          (beforeClose)="utilityMethods.arrangeMenuBeforeClose($event)">
+          >
+          </button>
+        </div>
+        <div class="db-menu-style">
+          <button ejs-dropdownbutton id="btnEditMenu" #btnEditMenu cssClass='db-dropdown-menu' 
+            content="Edit"  [items]='dropDownDataSources.getEditMenuItems' (select)="menuClick($event)"
+            (beforeItemRender)="beforeItemRender($event)" 
+            (beforeOpen)="utilityMethods.arrangeMenuBeforeOpen($event)"
+            target='.e-contextmenu-wrapper.editMenu'
+            (beforeClose)="utilityMethods.arrangeMenuBeforeClose($event)">
+            >
+          </button>
+        </div>
+        <div class="db-menu-style">
+          <button ejs-dropdownbutton id="btnDesignMenu" cssClass='db-dropdown-menu' 
+            content="Design" [items]='dropDownDataSources.getDesignMenuItems' (select)="menuClick($event)"
+            target='.e-contextmenu-wrapper.designMenu'
+            (beforeItemRender)="beforeItemRender($event)" 
+            (beforeOpen)="utilityMethods.arrangeMenuBeforeOpen($event)"
+            (beforeClose)="utilityMethods.arrangeMenuBeforeClose($event)">
+          >
+          </button>
+        </div>
+        <div class="db-menu-style">
+          <button ejs-dropdownbutton id="btnSelectMenu" cssClass='db-dropdown-menu' 
+            [items]='dropDownDataSources.getSelectMenuItems' content="Select" (select)="menuClick($event)"
+            (beforeItemRender)="beforeItemRender($event)" 
+            (beforeOpen)="utilityMethods.arrangeMenuBeforeOpen($event)"
+            (beforeClose)="utilityMethods.arrangeMenuBeforeClose($event)"
+            >
+          >
+          </button>
+        </div>
+        <div class="db-menu-style">
+          <button ejs-dropdownbutton id="btnToolsMenu" cssClass='db-dropdown-menu' 
+            content="Tools" [items]='dropDownDataSources.getToolsMenuItems' (select)="menuClick($event)"
+            (beforeOpen)="utilityMethods.arrangeMenuBeforeOpen($event)" 
+            (beforeItemRender)="beforeItemRender($event)" 
+            (beforeClose)="utilityMethods.arrangeMenuBeforeClose($event)">
+          >
+          </button>
+        </div>
+        <div class="db-menu-style" >
+          <button ejs-dropdownbutton id="btnViewMenu" cssClass='db-dropdown-menu' #btnViewMenu 
+            [items]='dropDownDataSources.getViewMenuItems' content="View" (select)="menuClick($event)" 
+            (beforeOpen)="utilityMethods.arrangeMenuBeforeOpen($event)" 
+            (beforeItemRender)="beforeItemRender($event)" 
+            (beforeClose)="utilityMethods.arrangeMenuBeforeClose($event)">
+            >
+          </button>
+        </div> 
+    </div> 
+    </div>
+    <div class='db-toolbar-editor'>
+      <div class='db-toolbar-container'>
+        <ejs-toolbar id='toolbarEditor' #toolbarEditor overflowMode='Scrollable' (clicked)='toolbarEditorClick($event)'>
+            <e-items>
+              <e-item prefixIcon="sf-icon-undo tb-icons" tooltipText="Undo" cssClass="tb-item-start tb-item-undo">
+              </e-item>
+              <e-item prefixIcon="sf-icon-redo tb-icons" tooltipText="Redo" cssClass="tb-item-end tb-item-redo">
+              </e-item>
+              <e-item type="Separator">
+              </e-item>
+              <e-item prefixIcon="sf-icon-pan tb-icons" tooltipText="Pan Tool" cssClass="tb-item-start pan-item">
+              </e-item>
+              <e-item prefixIcon="sf-icon-pointer tb-icons" tooltipText="Select Tool" cssClass="tb-item-middle tb-item-selected">
+              </e-item>
+              <e-item type="Separator">
+              </e-item>
+              <e-item tooltipText="Signal Duration(ms)" cssClass="tb-item-end tb-dropdown-btn-icon" [visible]="false">
+                <ng-template #template>
+                  <div className="db-text-container" style="margin-left:10px;margin-top: -10px;"><div className="db-text-input" style="width: 80px;">
+                    <ejs-numerictextbox min='1000' max='10000' value='3000' step='1000' format='###' (change)="changeStateTemplate($event)"></ejs-numerictextbox>
+                  </div></div>
+                  <!-- <div  className="db-text-container" style="margin-left: 10px;margin-bottom: 10px;width:100px">
+                    <ejs-numerictextbox min='1000' max='10000' value='3000' step='1000' format='###' (change)="changeStateTemplate($event)"></ejs-numerictextbox>
+                  </div> -->
+                </ng-template>
+              </e-item>
+              <e-item tooltipText="Zoom" align ="Right" cssClass="tb-item-end tb-zoom-dropdown-btn">
+                <ng-template #template>
+                    <button ejs-dropdownbutton id="btnZoomIncrement" [items]='dropDownDataSources.zoomMenuItems' [content]="zoomContent()" (select)="utilityMethods.zoomChange($event)">
+                    </button>
+                </ng-template>
+              </e-item>
+            </e-items>
+        </ejs-toolbar>
+      </div>
+    </div>
+  </div>
+  <div class='row content'>
+    <div class='sidebar show-overview'>
+      <div class="db-palette-parent">
+        <ejs-symbolpalette id="symbolpalette" 
+          [expandMode]='palettes.expandMode' [palettes]='palettes.palettes' 
+          width="100%" height="100%" 
+          [symbolMargin]='palettes.symbolMargin' [getSymbolInfo]='palettes.getSymbolInfo' 
+        >
+        </ejs-symbolpalette>
+      </div>
+    </div>
+    <div class='main-content' role='main'>
+      <div class="db-diagram-container">
+        <div id="diagramContainerDiv" class="db-current-diagram-container">
+          <ejs-diagram #diagram id="diagram"
+            width="100%" height="100%" 
+            [nodes]="nodes" [connectors]="connectors" 
+            [getConnectorDefaults]='setConnectorDefaults' 
+            [rulerSettings]="rulerSettings"
+            [pageSettings]="pageSettings"
+            [scrollSettings]="scrollSettings"
+            (created)="diagramCreated()"
+            [drawingObject]="drawingObject"
+            [selectedItems]="selectedItems"
+            collectionChange="collectionChange($event)"
+            (click)="click($event)"
+            (drop)="drop($event)"
+            (selectionChange)="this.diagramClientSideEvents.selectionChange($event)"
+            (historyChange)="diagramClientSideEvents.historyChange()"
+            (mouseup)="onMouseUp($event)" (mousedown)="onMouseDown($event)"
+            >
+          </ejs-diagram>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ejs-dialog id="exportDialog" #exportDialog width='400px' header='Export Diagram' [target]='dlgTarget' isModal='true' [animationSettings]='dialogAnimationSettings'
+    [buttons]='exportingButtons' [visible]='dialogVisibility' showCloseIcon='true'>
+    <ng-template #content>
+        <div id="exportDialogContent">
+            <div class="row">
+                <div class="row">
+                    File Name
+                </div>
+                <div class="row db-dialog-child-prop-row">
+                    <input type="text" id="exportfileName" [value]="utilityMethods.fileName()" autocomplete="off"> 
+                </div>
+            </div>
+            <div class="row db-dialog-prop-row">
+                <div class="col-xs-6 db-col-left">
+                    <div class="row">
+                        Format
+                    </div>
+                    <div class="row db-dialog-child-prop-row">
+                        <ejs-dropdownlist id="exportFormat" [(value)]="this.selectedItem.exportSettings.format" [dataSource]='dropDownDataSources.fileFormats'
+                            [fields]='dropdownListFields'>
+                        </ejs-dropdownlist>
+                    </div>
+                </div>
+                <div class="col-xs-6 db-col-right">
+                    <div class="row">
+                        Region
+                    </div>
+                    <div class="row db-dialog-child-prop-row">
+                        <ejs-dropdownlist id="exportRegion" [(value)]="this.selectedItem.exportSettings.region" [dataSource]='dropDownDataSources.diagramRegions'
+                            [fields]='dropdownListFields'>
+                        </ejs-dropdownlist>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</ejs-dialog>
+<!-- <ejs-dialog id="exportDialog" #exportDialog width='400px' header='Export Diagram' [target]='dlgTarget' isModal='true' [animationSettings]='dialogAnimationSettings'
+    [buttons]='exportingButtons' [visible]='dialogVisibility' showCloseIcon='true'>
+    <ng-template #content>
+        <div id="exportDialogContent">
+            <div class="row">
+                <div class="row">
+                    File Name
+                </div>
+                <div class="row db-dialog-child-prop-row">
+                    <input type="text" id="exportfileName" [(ngModel)]='selectedItem.exportSettings.fileName'>
+                </div>
+            </div>
+            <div class="row db-dialog-prop-row">
+                <div class="col-xs-6 db-col-left">
+                    <div class="row">
+                        Format
+                    </div>
+                    <div class="row db-dialog-child-prop-row">
+                        <ejs-dropdownlist id="exportFormat" [(value)]="selectedItem.exportSettings.format" [dataSource]='dropDownDataSources.fileFormats'
+                            [fields]='dropdownListFields'>
+                        </ejs-dropdownlist>
+                    </div>
+                </div>
+                <div class="col-xs-6 db-col-right">
+                    <div class="row">
+                        Region
+                    </div>
+                    <div class="row db-dialog-child-prop-row">
+                        <ejs-dropdownlist id="exportRegion" [(value)]="selectedItem.exportSettings.region" [dataSource]='dropDownDataSources.diagramRegions'
+                            [fields]='dropdownListFields'>
+                        </ejs-dropdownlist>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</ejs-dialog> -->
+<ejs-dialog id="printDialog" #printDialog width='335px' header='Print Diagram' [target]='dlgTarget' isModal='true' [animationSettings]='dialogAnimationSettings'
+    [buttons]='printingButtons' [visible]='dialogVisibility' showCloseIcon='true'>
+    <ng-template #content>
+        <div id="printDialogContent">
+            <div class="row">
+                <div class="row">
+                    Region
+                </div>
+                <div class="row db-dialog-child-prop-row">
+                    <ejs-dropdownlist [(value)]="this.selectedItem.printSettings.region" [dataSource]='dropDownDataSources.diagramRegions' [fields]='dropdownListFields'>
+                    </ejs-dropdownlist>
+                </div>
+            </div>
+            <div class="row db-dialog-prop-row">
+                <div class="row">
+                    Print Settings
+                </div>
+                <div class="row db-dialog-child-prop-row">
+                    <ejs-dropdownlist [dataSource]='dropDownDataSources.paperList' [fields]='dropdownListFields' [(value)]='this.selectedItem.printSettings.paperSize'>
+                    </ejs-dropdownlist>
+                </div>
+            </div>
+            <div id="printCustomSize" class="row db-dialog-prop-row" style="display:none; height: 28px;">
+                <div class="col-xs-6 db-col-left">
+                    <div class="db-text-container">
+                        <div class="db-text">
+                            <span>W</span>
+                        </div>
+                        <div class="db-text-input">
+                            <ejs-numerictextbox id="printPageWidth" min="100" step="1" format="n0" [(value)]="selectedItem.printSettings.pageWidth"></ejs-numerictextbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 db-col-right">
+                    <div class="db-text-container">
+                        <div class="db-text">
+                            <span>H</span>
+                        </div>
+                        <div class="db-text-input">
+                            <ejs-numerictextbox id="printPageHeight" min="100" step="1" format="n0" [(value)]="selectedItem.printSettings.pageHeight"></ejs-numerictextbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="printOrientation" class="row db-dialog-prop-row" style="height: 28px; padding: 5px 0px;">
+                <div class="col-xs-3 db-prop-col-style" style="margin-right: 8px;">
+                    <ejs-radiobutton id='printPortrait' label="Portrait" name="printSettings" [checked]="true" >
+                    </ejs-radiobutton>
+                </div>
+                <div class="col-xs-3 db-prop-col-style">
+                    <ejs-radiobutton id='printLandscape' label="Landscape" name="printSettings" >
+                    </ejs-radiobutton>
+                </div>
+            </div>
+            <div class="row db-dialog-prop-row" style="margin-top: 16px">
+                <ejs-checkbox id='printMultiplePage' label="Scale to fit 1 page" [(checked)]="selectedItem.printSettings.multiplePage"></ejs-checkbox>
+            </div>
+        </div>
+    </ng-template>
+</ejs-dialog>
