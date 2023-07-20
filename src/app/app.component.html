@@ -141,9 +141,6 @@
                   <div className="db-text-container" style="margin-left:10px;margin-top: -10px;"><div className="db-text-input" style="width: 80px;">
                     <ejs-numerictextbox min='1000' max='10000' value='3000' step='1000' format='###' (change)="changeStateTemplate($event)"></ejs-numerictextbox>
                   </div></div>
-                  <!-- <div  className="db-text-container" style="margin-left: 10px;margin-bottom: 10px;width:100px">
-                    <ejs-numerictextbox min='1000' max='10000' value='3000' step='1000' format='###' (change)="changeStateTemplate($event)"></ejs-numerictextbox>
-                  </div> -->
                 </ng-template>
               </e-item>
               <e-item tooltipText="Zoom" align ="Right" cssClass="tb-item-end tb-zoom-dropdown-btn">
@@ -231,43 +228,6 @@
         </div>
     </ng-template>
 </ejs-dialog>
-<!-- <ejs-dialog id="exportDialog" #exportDialog width='400px' header='Export Diagram' [target]='dlgTarget' isModal='true' [animationSettings]='dialogAnimationSettings'
-    [buttons]='exportingButtons' [visible]='dialogVisibility' showCloseIcon='true'>
-    <ng-template #content>
-        <div id="exportDialogContent">
-            <div class="row">
-                <div class="row">
-                    File Name
-                </div>
-                <div class="row db-dialog-child-prop-row">
-                    <input type="text" id="exportfileName" [(ngModel)]='selectedItem.exportSettings.fileName'>
-                </div>
-            </div>
-            <div class="row db-dialog-prop-row">
-                <div class="col-xs-6 db-col-left">
-                    <div class="row">
-                        Format
-                    </div>
-                    <div class="row db-dialog-child-prop-row">
-                        <ejs-dropdownlist id="exportFormat" [(value)]="selectedItem.exportSettings.format" [dataSource]='dropDownDataSources.fileFormats'
-                            [fields]='dropdownListFields'>
-                        </ejs-dropdownlist>
-                    </div>
-                </div>
-                <div class="col-xs-6 db-col-right">
-                    <div class="row">
-                        Region
-                    </div>
-                    <div class="row db-dialog-child-prop-row">
-                        <ejs-dropdownlist id="exportRegion" [(value)]="selectedItem.exportSettings.region" [dataSource]='dropDownDataSources.diagramRegions'
-                            [fields]='dropdownListFields'>
-                        </ejs-dropdownlist>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </ng-template>
-</ejs-dialog> -->
 <ejs-dialog id="printDialog" #printDialog width='335px' header='Print Diagram' [target]='dlgTarget' isModal='true' [animationSettings]='dialogAnimationSettings'
     [buttons]='printingButtons' [visible]='dialogVisibility' showCloseIcon='true'>
     <ng-template #content>

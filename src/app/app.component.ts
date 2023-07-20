@@ -299,51 +299,6 @@ export class AppComponent {
     // Assigning the component instance to the window object
     window.appComponent = this;
   }
-//   constructor() { }
-//   ngOnInit(){
-//     this.renderer.listen('diagram', 'mouseup', this.handleMouseUp);
-//   this.renderer.listen('diagram', 'mousedown', this.handleMouseDown);
-//   }
-//   handleMouseUp(args: MouseEvent): void {
-//     let diagram = (document.getElementById("diagram") as any).ej2_instances[0];
-//     if (args.target instanceof HTMLElement) {
-//       const targetId = args.target.id.replace("group_container", "");
-//       let targetNode;
-//       diagram.nodes.forEach((element:any)=> {
-//         if (element.id === targetId) {
-//           targetNode = element;
-//         }
-//       });
-  
-//       if (targetNode !== undefined) {
-//         const child1 = diagram.getObject((targetNode as any).children[1]);
-//         child1.style.fill = "white";
-//         (targetNode as any).addInfo.binarystate = 0;
-//         setBinaryStateFromInput(targetNode);
-//         (this as any).appComponent.RunSimulation();
-//       }
-//     }
-//   }
-//   handleMouseDown(args: MouseEvent): void {
-//     let diagram = (document.getElementById("diagram") as any).ej2_instances[0];
-//     if (args.target instanceof HTMLElement) {
-//       const targetId = args.target.id.replace("group_container", "");
-//       let targetNode;
-//       diagram.nodes.forEach((element:any) => {
-//         if (element.id === targetId) {
-//           targetNode = element;
-//         }
-//       });
-  
-//       if (targetNode !== undefined) {
-//         const child1 = diagram.getObject((targetNode as any).children[1]);
-//         child1.style.fill = "#05DAC5";
-//         (targetNode as any).addInfo.binarystate = 1;
-//         setBinaryStateFromInput(targetNode);
-//         (this as any).appComponent.RunSimulation();
-//       }
-//     }
-//   }
   public dropDownDataSources: DropDownDataSources = new DropDownDataSources();
   public palettes:Palettes =new Palettes();
   public selectedItem: SelectorViewModel = new SelectorViewModel();

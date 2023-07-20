@@ -70,21 +70,17 @@ export class DiagramClientSideEvents {
                 this.enableToolbarItems(selectedItems);
                 if(args.newValue.length>0 && args.newValue[0] instanceof Connector){
                     diagram.selectedItems = { constraints: SelectorConstraints.All };
-                    
                     toolbarEditor.hideItem(6,true);
-                    // toolbarObj.items[7].template = '<div style="margin-left:1000px;"></div>';
                 }
                 else{
                     if((diagram.selectedItems as any).nodes.length > 0 &&
                          (diagram.selectedItems as any).nodes[0].id.indexOf('Clock') != -1)
                     {
                         toolbarEditor.hideItem(6,false);
-                        // toolbarObj.items[7].template = '<div style="margin-left:900px;"></div>';
                     }
                     else
                     {
                         toolbarEditor.hideItem(6,true);
-                        // toolbarObj.items[7].template = '<div style="margin-left:1000px;"></div>';
                     }
                 diagram.selectedItems = { constraints: SelectorConstraints.All & ~SelectorConstraints.Rotate & ~SelectorConstraints.ResizeAll };
                 }
