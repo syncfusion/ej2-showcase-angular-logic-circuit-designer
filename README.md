@@ -7,7 +7,7 @@ Install Node version - 16.14.0 from https://nodejs.org/en/download/
 
 Install Angular CLI using the below command 
 ```
-npm install -g @angular/cli
+npm install -g @angular/cli@16.0.0
 ```
 
 ## To Install all packages
