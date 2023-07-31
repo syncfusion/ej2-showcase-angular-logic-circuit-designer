@@ -741,7 +741,6 @@ input, button, select, textarea {
 
 #toolbarEditor .db-theme-svg,
 .db-ddl-template-style .db-theme-svg {
-    background-image: url('Theme.svg');
     background-repeat: no-repeat;
     width: 14px;
     height: 14px;
@@ -780,26 +779,6 @@ input, button, select, textarea {
 
 #nodeBorderStyle_popup .e-list-item {
     padding-right: 0px;
-}
-
-.ddl_linestyle_none {
-    background-image: url('common_images/linestyle/0,0.svg');
-}
-
-.ddl_linestyle_one_two {
-    background-image: url('common_images/linestyle/1,2.svg');
-}
-
-.ddl_linestyle_three_three {
-    background-image: url('common_images/linestyle/3,3.svg');
-}
-
-.ddl_linestyle_five_three {
-    background-image: url('common_images/linestyle/5,3.svg');
-}
-
-.ddl_linestyle_four_four_one {
-    background-image: url('common_images/linestyle/4,4,1.svg');
 }
 
 .e-toolbar .e-toolbar-items:first-child > .e-toolbar-item:last-child {
