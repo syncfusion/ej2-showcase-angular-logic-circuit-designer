@@ -1,4 +1,4 @@
-import { AnnotationAlignment, BpmnActivity, BpmnBoundary, BpmnDataObjects, BpmnEvents, BpmnFlow, BpmnGateway, BpmnGateways, BpmnLoops, BpmnShapeModel, BpmnTasks, BpmnTriggers, Connector, ConnectorModel, ContextMenuItemModel, Diagram, DiagramBeforeMenuOpenEventArgs, HorizontalAlignment, IDragEnterEventArgs, IEndChangeEventArgs, IHistoryChangeArgs, IRotationEventArgs, ISelectionChangeEventArgs, ISizeChangeEventArgs, NodeModel,  PathAnnotationModel,  SelectorModel,  ShapeAnnotationModel, TextAlign, TextStyleModel, UserHandleEventsArgs, UserHandleModel, VerticalAlignment } from "@syncfusion/ej2-angular-diagrams";
+import { AnnotationAlignment, BpmnActivity, BpmnBoundary, BpmnDataObjects, BpmnEvents, BpmnFlow, BpmnGateway, BpmnGateways, BpmnLoops, BpmnShapeModel, BpmnTasks, BpmnTriggers, Connector, ConnectorModel, ContextMenuItemModel, Diagram, DiagramBeforeMenuOpenEventArgs, HorizontalAlignment, IDragEnterEventArgs, IElementDrawEventArgs, IEndChangeEventArgs, IHistoryChangeArgs, IRotationEventArgs, ISelectionChangeEventArgs, ISizeChangeEventArgs, NodeModel,  PathAnnotationModel,  SelectorModel,  ShapeAnnotationModel, TextAlign, TextStyleModel, UserHandleEventsArgs, UserHandleModel, VerticalAlignment } from "@syncfusion/ej2-angular-diagrams";
 import { PathAnnotation,ShapeAnnotation ,SelectorConstraints} from '@syncfusion/ej2-diagrams'
 import { AppComponent } from "src/app/app.component";
 import {  SelectorViewModel } from "./selector";
@@ -86,6 +86,7 @@ export class DiagramClientSideEvents {
                 }
         }
     }
+   
     public enableToolbarItems(selectedItems:any) {
         const toolbarContainer = document.getElementsByClassName('db-toolbar-container')[0];
         let toolbarClassName = 'db-toolbar-container';
