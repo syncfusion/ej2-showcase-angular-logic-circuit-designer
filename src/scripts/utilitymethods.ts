@@ -139,20 +139,42 @@ export class UtilityMethods {
                 zoomCurrentValue.content = (diagram.scrollSettings.currentZoom * 100).toFixed() + '%';
                 break;
             case 'Zoom to Fit':
-                diagram.fitToPage({ mode: 'Page', region: 'Content'});
+                zoom.zoomFactor = 1 / currentZoom - 1;
+                diagram.zoomTo(zoom);
                 zoomCurrentValue.content = diagram.scrollSettings.currentZoom;
                 break;
             case 'Zoom to 50%':
-                zoom.zoomFactor = (0.5 / currentZoom) - 1;
-                diagram.zoomTo(zoom);
+                if (currentZoom === 0.5) {
+                    currentZoom = 0;
+                    zoom.zoomFactor = (0.5 / currentZoom) - 1;
+                    diagram.zoomTo(zoom);
+                }
+                else {
+                    zoom.zoomFactor = (0.5 / currentZoom) - 1;
+                    diagram.zoomTo(zoom);
+                }
                 break;
             case 'Zoom to 100%':
-                zoom.zoomFactor = (1 / currentZoom) - 1;
-                diagram.zoomTo(zoom);
+                if (currentZoom === 1) {
+                    currentZoom = 0;
+                    zoom.zoomFactor = (1 / currentZoom) - 1;
+                    diagram.zoomTo(zoom);
+                }
+                else {
+                    zoom.zoomFactor = (1 / currentZoom) - 1;
+                    diagram.zoomTo(zoom);
+                }
                 break;
             case 'Zoom to 200%':
-                zoom.zoomFactor = (2 / currentZoom) - 1;
-                diagram.zoomTo(zoom);
+                if (currentZoom === 2) {
+                    currentZoom = 0;
+                    zoom.zoomFactor = (2 / currentZoom) - 1;
+                    diagram.zoomTo(zoom);
+                }
+                else {
+                    zoom.zoomFactor = (2 / currentZoom) - 1;
+                    diagram.zoomTo(zoom);
+                }
                 break;
         }
         zoomCurrentValue.content = Math.round(diagram.scrollSettings.currentZoom*100) + ' %';  

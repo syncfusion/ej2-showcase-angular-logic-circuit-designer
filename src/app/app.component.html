@@ -172,6 +172,7 @@
             width="100%" height="100%" 
             [nodes]="nodes" [connectors]="connectors" 
             [getConnectorDefaults]='setConnectorDefaults' 
+            [getNodeDefaults]="getNodeDefaults"
             [rulerSettings]="rulerSettings"
             [pageSettings]="pageSettings"
             [scrollSettings]="scrollSettings"
@@ -183,6 +184,7 @@
             (drop)="drop($event)"
             (selectionChange)="this.diagramClientSideEvents.selectionChange($event)"
             (historyChange)="diagramClientSideEvents.historyChange()"
+            (elementDraw)="elementDraw($event)"
             (mouseup)="onMouseUp($event)" (mousedown)="onMouseDown($event)"
             >
           </ejs-diagram>

@@ -5,7 +5,7 @@ import { Uploader } from '@syncfusion/ej2-inputs';
 import { AnimationSettingsModel, BeforeOpenCloseMenuEventArgs,  } from '@syncfusion/ej2-angular-splitbuttons';
 import { formatUnit, createElement, closest } from '@syncfusion/ej2-base';
 import {
-  Diagram, NodeModel, UndoRedo, ConnectorModel, PointPortModel, Connector, FlowShapeModel,
+  Diagram, NodeModel, UndoRedo, ConnectorModel, PointPortModel, Connector, FlowShapeModel,ConnectorEditing,
   SymbolInfo, IDragEnterEventArgs, SnapSettingsModel, MarginModel, TextStyleModel, StrokeStyleModel,
   OrthogonalSegmentModel, Node, PaletteModel,BpmnDiagrams,KeyModifiers,SnapConstraints,DiagramTools,NodeConstraints,Keys,SelectorConstraints,SymbolPalette,PrintAndExport
 } from '@syncfusion/ej2-diagrams';
@@ -15,9 +15,10 @@ import {DropDownDataSources } from '../scripts/dropdowndatasource';
 import {Palettes } from '../scripts/palettes';
 import { DiagramClientSideEvents } from '../scripts/event';
 import { SelectorViewModel } from 'src/scripts/selector';
-import { BezierSmoothness, ConnectorConstraints, ControlPointsVisibility, DiagramRegions, FileFormats, IClickEventArgs, IDropEventArgs, IScrollChangeEventArgs, ISelectionChangeEventArgs, PageSettingsModel, PortConstraints, PortVisibility, RulerSettingsModel, ScrollSettingsModel, SelectorModel } from '@syncfusion/ej2-angular-diagrams';
+import { BezierSmoothness, ConnectorConstraints, ControlPointsVisibility, DiagramRegions, FileFormats, IClickEventArgs, IDropEventArgs, IElementDrawEventArgs, IScrollChangeEventArgs, ISelectionChangeEventArgs, PageSettingsModel, PortConstraints, PortVisibility, RulerSettingsModel, ScrollSettingsModel, SelectorModel } from '@syncfusion/ej2-angular-diagrams';
 import { PaperSize, UtilityMethods } from 'src/scripts/utilitymethods';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
+Diagram.Inject(ConnectorEditing)
 
 let zerodata = 'M28 0H80V65H28V56H12.9236C12.4425 59.1151 9.74979 61.5 6.5 61.5C2.91015 61.5 0 58.5899 0 55C0 51.4101 2.91015 48.5 6.5 48.5C9.74979 48.5 12.4425 50.8849 12.9236 54H28V41H12.9236C12.4425 44.1151 9.74979 46.5 6.5 46.5C2.91015 46.5 0 43.5899 0 40C0 36.4101 2.91015 33.5 6.5 33.5C9.74979 33.5 12.4425 35.8849 12.9236 39H28V26H12.9236C12.4425 29.1151 9.74979 31.5 6.5 31.5C2.91015 31.5 0 28.5899 0 25C0 21.4101 2.91015 18.5 6.5 18.5C9.74979 18.5 12.4425 20.8849 12.9236 24H28V11H12.9236C12.4425 14.1151 9.74979 16.5 6.5 16.5C2.91015 16.5 0 13.5899 0 10C0 6.41015 2.91015 3.5 6.5 3.5C9.74979 3.5 12.4425 5.88491 12.9236 9H28V0ZM78 2H30V63H78V2ZM6.5 15.5C9.53757 15.5 12 13.0376 12 10C12 6.96243 9.53757 4.5 6.5 4.5C3.46243 4.5 1 6.96243 1 10C1 13.0376 3.46243 15.5 6.5 15.5ZM6.5 30.5C9.53757 30.5 12 28.0376 12 25C12 21.9624 9.53757 19.5 6.5 19.5C3.46243 19.5 1 21.9624 1 25C1 28.0376 3.46243 30.5 6.5 30.5ZM6.5 45.5C9.53757 45.5 12 43.0376 12 40C12 36.9624 9.53757 34.5 6.5 34.5C3.46243 34.5 1 36.9624 1 40C1 43.0376 3.46243 45.5 6.5 45.5ZM6.5 60.5C9.53757 60.5 12 58.0376 12 55C12 51.9624 9.53757 49.5 6.5 49.5C3.46243 49.5 1 51.9624 1 55C1 58.0376 3.46243 60.5 6.5 60.5Z M54.7838 50.672C50.9758 50.672 47.8958 49.0853 45.5438 45.912C43.2291 42.7387 42.0718 38.128 42.0718 32.08C42.0718 25.9947 43.2291 21.4213 45.5438 18.36C47.8958 15.2987 50.9758 13.768 54.7838 13.768C58.5918 13.768 61.6531 15.3173 63.9678 18.416C66.3198 21.4773 67.4958 26.032 67.4958 32.08C67.4958 38.128 66.3198 42.7387 63.9678 45.912C61.6531 49.0853 58.5918 50.672 54.7838 50.672ZM54.7838 44.288C55.7171 44.288 56.5571 43.952 57.3038 43.28C58.0504 42.5707 58.6291 41.3387 59.0398 39.584C59.4878 37.792 59.7118 35.2907 59.7118 32.08C59.7118 28.832 59.4878 26.3493 59.0398 24.632C58.6291 22.9147 58.0504 21.7387 57.3038 21.104C56.5571 20.4693 55.7171 20.152 54.7838 20.152C53.8504 20.152 53.0104 20.4693 52.2638 21.104C51.5171 21.7387 50.9198 22.9147 50.4718 24.632C50.0611 26.3493 49.8558 28.832 49.8558 32.08C49.8558 35.2907 50.0611 37.792 50.4718 39.584C50.9198 41.3387 51.5171 42.5707 52.2638 43.28C53.0104 43.952 53.8504 44.288 54.7838 44.288Z';
 let onedata = 'M28 0H80V65H28V56H12.9236C12.4425 59.1151 9.74979 61.5 6.5 61.5C2.91015 61.5 0 58.5899 0 55C0 51.4101 2.91015 48.5 6.5 48.5C9.74979 48.5 12.4425 50.8849 12.9236 54H28V41H12.9236C12.4425 44.1151 9.74979 46.5 6.5 46.5C2.91015 46.5 0 43.5899 0 40C0 36.4101 2.91015 33.5 6.5 33.5C9.74979 33.5 12.4425 35.8849 12.9236 39H28V26H12.9236C12.4425 29.1151 9.74979 31.5 6.5 31.5C2.91015 31.5 0 28.5899 0 25C0 21.4101 2.91015 18.5 6.5 18.5C9.74979 18.5 12.4425 20.8849 12.9236 24H28V11H12.9236C12.4425 14.1151 9.74979 16.5 6.5 16.5C2.91015 16.5 0 13.5899 0 10C0 6.41015 2.91015 3.5 6.5 3.5C9.74979 3.5 12.4425 5.88491 12.9236 9H28V0ZM78 2H30V63H78V2ZM6.5 15.5C9.53757 15.5 12 13.0376 12 10C12 6.96243 9.53757 4.5 6.5 4.5C3.46243 4.5 1 6.96243 1 10C1 13.0376 3.46243 15.5 6.5 15.5ZM6.5 30.5C9.53757 30.5 12 28.0376 12 25C12 21.9624 9.53757 19.5 6.5 19.5C3.46243 19.5 1 21.9624 1 25C1 28.0376 3.46243 30.5 6.5 30.5ZM6.5 45.5C9.53757 45.5 12 43.0376 12 40C12 36.9624 9.53757 34.5 6.5 34.5C3.46243 34.5 1 36.9624 1 40C1 43.0376 3.46243 45.5 6.5 45.5ZM6.5 60.5C9.53757 60.5 12 58.0376 12 55C12 51.9624 9.53757 49.5 6.5 49.5C3.46243 49.5 1 51.9624 1 55C1 58.0376 3.46243 60.5 6.5 60.5Z M43.9199 50V43.336H51.6479V22.784H44.9839V17.688C46.9253 17.3147 48.5679 16.8667 49.9119 16.344C51.2933 15.8213 52.5999 15.1867 53.8319 14.44H59.8799V43.336H66.5439V50H43.9199Z'
@@ -790,13 +791,17 @@ export class AppComponent {
     connector.constraints = ConnectorConstraints.Default & ~ConnectorConstraints.Drag;
     return connector;
   }
+  public getNodeDefaults(node:Node){
+    node.constraints = NodeConstraints.Default &~ NodeConstraints.InConnect &~ NodeConstraints.OutConnect;
+    node.annotations =[ { constraints :NodeConstraints.Default &~ NodeConstraints.ReadOnly}]
+    return node;
+  }
   public diagramCreated(): void {
     (this.diagram as any).fitToPage();
     this.RunSimulation();
   }
   public pageSettings: PageSettingsModel = {
-    background: { color: '#FFFFFF' }, width: 600, height: 1460, margin: { left: 5, top: 5 },
-    orientation: 'Landscape', showPageBreaks: false,
+   showPageBreaks: false, multiplePage:true
   };
   public scrollSettings: ScrollSettingsModel = {
     canAutoScroll: true, scrollLimit: 'Infinity', minZoom: 0.25, maxZoom: 30 
@@ -811,6 +816,51 @@ export class AppComponent {
   public collectionChange(args: ISelectionChangeEventArgs): void {
     this.RunSimulation();
   }
+  public elementDraw(args:IElementDrawEventArgs){
+    let diagram = this.selectedItem.diagram;
+    if (args.state == "Completed" && args.objectType == "Connector") {
+        var sourcenode = diagram.getObject((args.source as any).sourceID);
+        var targetnode = diagram.getObject((args.source as any).targetID);
+        var sourceport = undefined;
+        var targetport = undefined;
+        for(var i=0;i<(args.source as any).segments.length;i++)
+        {
+            (args.source as any).segments[i].isInternalSegment = true;
+        }
+        if (targetnode != undefined && targetnode.ports.length > 0) {
+            targetnode.ports.forEach((element: any) => {
+                if (element.id == (args.source as any).targetPortID) {
+                    targetport = element;
+                }
+            });
+            if ((targetport as any).inEdges.length > 1) {
+            // diagram.commandHandler.addObjectToDiagram(diagram.selectedItems.connectors[0]);
+                diagram.remove();
+            }
+        }
+
+        if ((args.source as any).sourcePortID != "" && (args.source as any).targetPortID != ""
+            && (args.source as any).sourcePortID != undefined && (args.source as any).targetPortID != undefined
+            && sourcenode.addInfo != undefined) {
+            if (sourcenode.id.indexOf('Flop') != -1) {
+                if ((args.source as any).sourcePortID.indexOf('q') != -1 && sourcenode.addInfo.binarystate1 != undefined) {
+                    args.source.addInfo = { binarystate: sourcenode.addInfo.binarystate1 };
+                }
+                else if ((args.source as any).sourcePortID.indexOf('q1') != -1 && sourcenode.addInfo.binarystate2 != undefined) {
+                    args.source.addInfo = { binarystate: sourcenode.addInfo.binarystate2 };
+                }
+            }
+            else {
+                args.source.addInfo = { binarystate: sourcenode.addInfo.binarystate };
+            }
+            this.RunSimulation();
+        }
+        else {
+            // diagram.commandHandler.addObjectToDiagram(diagram.selectedItems.connectors[0]);
+            diagram.remove();
+        }
+    }
+}
   public RunSimulation() {
     let isFlip= true;
     let regulatednodes = [];
