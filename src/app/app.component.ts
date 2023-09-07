@@ -5,7 +5,7 @@ import { Uploader } from '@syncfusion/ej2-inputs';
 import { AnimationSettingsModel, BeforeOpenCloseMenuEventArgs,  } from '@syncfusion/ej2-angular-splitbuttons';
 import { formatUnit, createElement, closest } from '@syncfusion/ej2-base';
 import {
-  Diagram, NodeModel, UndoRedo, ConnectorModel, PointPortModel, Connector, FlowShapeModel,ConnectorEditing,
+  Diagram, NodeModel, UndoRedo, ConnectorModel, PointPortModel, Connector, FlowShapeModel,ConnectorEditing,AnnotationConstraints,
   SymbolInfo, IDragEnterEventArgs, SnapSettingsModel, MarginModel, TextStyleModel, StrokeStyleModel,
   OrthogonalSegmentModel, Node, PaletteModel,BpmnDiagrams,KeyModifiers,SnapConstraints,DiagramTools,NodeConstraints,Keys,SelectorConstraints,SymbolPalette,PrintAndExport
 } from '@syncfusion/ej2-diagrams';
@@ -791,9 +791,9 @@ export class AppComponent {
     connector.constraints = ConnectorConstraints.Default & ~ConnectorConstraints.Drag;
     return connector;
   }
+   //To set node default value
   public getNodeDefaults(node:Node){
-    node.constraints = NodeConstraints.Default &~ NodeConstraints.InConnect &~ NodeConstraints.OutConnect;
-    node.annotations =[ { constraints :NodeConstraints.Default &~ NodeConstraints.ReadOnly}]
+    node.annotations =[ { constraints : AnnotationConstraints.ReadOnly}]
     return node;
   }
   public diagramCreated(): void {
