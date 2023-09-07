@@ -791,7 +791,7 @@ export class AppComponent {
     connector.constraints = ConnectorConstraints.Default & ~ConnectorConstraints.Drag;
     return connector;
   }
-   //To set node default value
+   //To set default values for nodes
   public getNodeDefaults(node:Node){
     node.annotations =[ { constraints : AnnotationConstraints.ReadOnly}]
     return node;
