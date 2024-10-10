@@ -2393,8 +2393,8 @@ export class AppComponent {
     public uploader(){
         let uploadObj:Uploader = new Uploader({
         asyncSettings: {
-            saveUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save',
-            removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
+            saveUrl: 'https://services.syncfusion.com/angular/production/api/FileUploader/Save',
+            removeUrl: 'https://services.syncfusion.com/angular/production/api/FileUploader/Remove'
         },
         success: this.onUploadSuccess,
         showFileList:false
